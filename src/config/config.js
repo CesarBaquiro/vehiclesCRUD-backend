@@ -1,4 +1,8 @@
 export const {
-    PORT = 8080,
-  } = process.env;
-  
+  PORT = 8080,
+  DB_HOST = "localhost",
+  DB_PORT = 3306,
+  DB_USER = "root",
+  DB_PASSWORD = "1234",
+  DB_NAME = "vehiclescrud",
+} = process.env;
