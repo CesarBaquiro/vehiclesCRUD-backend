@@ -71,7 +71,7 @@ const VehicleController = {
             return res.status(200).json({"exists": true, "message": "The plate is already registered"});
           }
       
-          return res.status(400).json({"exists": false});
+          return res.status(200).json({"exists": false});
       
         } catch (error) {
           console.error(error.message);
