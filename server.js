@@ -1,7 +1,9 @@
 import express from "express";
 import { PORT } from "./src/config/config.js";
 import cors from "cors";
-import db from "./db.js";
+import vehicleRoutes from "./src/modules/vehicle/vehicle.routes.js";
+
+// Express app
 
 const app = express();
 
@@ -9,20 +11,15 @@ const app = express();
 app.use(cors({ origin: "http://localhost:4200" }));
 
 // Basic route
-app.get("/", async (req, res) => {
-  try {
-    const [rows] = await db.query("SELECT * FROM vehicle"); // Asynchronous database querying
-    if (!rows.length) {
-      console.log("No vehicles found");
-      return res.status(404).send("No vehicles found"); 
-    }
-    console.log(rows); // Print the vehicles to the console
-    res.json(rows); // Send response JSON
-  } catch (err) {
-    console.error('Error al obtener los vehículos:', err);
-    res.status(500).send('Error en la consulta de base de datos'); // Send an error response
-  }
+app.get("/", (req, res) => {
+  res.send("¡Hi vehicles CRUD!");
 });
+
+// Middleware to process JSON in the body
+app.use(express.json());
+
+//  Routes implementation
+app.use("/api/v1", vehicleRoutes);
 
 
 const httpServer = app.listen(PORT, () => {
